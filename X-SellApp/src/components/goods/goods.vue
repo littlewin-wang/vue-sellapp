@@ -36,7 +36,7 @@
         </li>
       </ul>
     </div>
-    <shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart>
+    <shopcart v-ref:shopcart :delivery-price="seller.deliveryPrice" :min-price="seller.minPrice" :select-foods="selectFoods"></shopcart>
   </div>
 </template>
 
@@ -92,6 +92,12 @@
           height += item.clientHeight
           this.listHeight.push(height)
         }
+      },
+      _drop (target) {
+        // 体验优化，异步加载下落动画
+        this.$nextTick(() => {
+          this.$refs.shopcart.drop(target)
+        })
       }
     },
     computed: {
@@ -134,6 +140,11 @@
     components: {
       shopcart,
       cartcontrol
+    },
+    events: {
+      'cart.add' (target) {
+        this._drop(target)
+      }
     }
   }
 </script>

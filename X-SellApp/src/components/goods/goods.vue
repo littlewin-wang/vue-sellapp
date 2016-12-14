@@ -25,7 +25,7 @@
                   <span class="count">月售{{food.sellCount}}份</span><span>好评率{{food.rating}}%</span>
                 </div>
                 <div class="price">
-                  <span class="now">￥{{food.price}}</span><span v-show="food.oldPrice" class="old">￥{{food.oldPrice}}</span>
+                  <span class="now">¥{{food.price}}</span><span v-show="food.oldPrice" class="old">¥{{food.oldPrice}}</span>
                 </div>
               </div>
             </li>
@@ -33,11 +33,13 @@
         </li>
       </ul>
     </div>
+    <shopcart></shopcart>
   </div>
 </template>
 
 <script type="text/ecmascript-6">
   import BScroll from 'better-scroll'
+  import shopcart from 'components/shopcart/shopcart'
 
   const ERR_OK = 0
 
@@ -112,6 +114,9 @@
           })
         }
       })
+    },
+    components: {
+      shopcart
     }
   }
 </script>

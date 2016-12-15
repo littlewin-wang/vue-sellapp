@@ -49,7 +49,7 @@
       padding: 6px
       transition: all 0.4s linear
       &.move-transition
-        opactiy: 1
+        opacity: 1
         transform: translate3d(0, 0, 0)
         .inner
           display: inline-block
@@ -71,7 +71,7 @@
       line-height: 24px
       text-align: center
       font-size: 10px
-      color: rgb(157, 153, 159)
+      color: rgb(147, 153, 159)
     .cart-add
       display: inline-block
       padding: 6px

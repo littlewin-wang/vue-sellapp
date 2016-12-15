@@ -194,7 +194,7 @@
         },
         enter (el) {
           /* eslint-disable no-unused-vars */
-          // let rf = el.offsetHeight
+          let rf = el.offsetHeight
           this.$nextTick(() => {
             el.style.webkitTransform = 'translate3d(0,0,0)'
             el.style.transform = 'translate3d(0,0,0)'

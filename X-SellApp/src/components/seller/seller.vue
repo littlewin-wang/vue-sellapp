@@ -28,6 +28,10 @@
             </div>
           </li>
         </ul>
+        <div class="favorite" @click="toggleFavorite">
+          <span class="icon-favorite" :class="{'active':favorite}"></span>
+          <span class="text">{{favoriteTest}}</span>
+        </div>
       </div>
       <split></split>
       <div class="bulletin">
@@ -76,6 +80,16 @@
         type: Object
       }
     },
+    data () {
+      return {
+        favorite: false
+      }
+    },
+    computed: {
+      favoriteTest () {
+        return this.favorite ? '已收藏' : '收藏'
+      }
+    },
     created () {
       this.classMap = ['decrease', 'discount', 'special', 'invoice', 'guarantee']
     },
@@ -90,6 +104,12 @@
       this._initPics()
     },
     methods: {
+      toggleFavorite (event) {
+        if (!event._constructed) {
+          return
+        }
+        this.favorite = !this.favorite
+      },
       _initScroll () {
         if (!this.scroll) {
           this.scroll = new BScroll(this.$els.seller, {
@@ -137,6 +157,7 @@
     overflow: hidden
     .overview
       padding: 18px
+      position: relative
       .title
         margin-bottom: 8px
         line-height: 14px
@@ -177,6 +198,24 @@
             color: rgb(7, 17, 27)
             .stress
               font-size: 24px
+
+      .favorite
+        position: absolute
+        width: 50px
+        right: 5px
+        top: 18px
+        text-align: center
+        .icon-favorite
+          display: block
+          line-height: 24px
+          font-size: 24px
+          color: #d4d6d9
+          &.active
+            color: rgb(240, 20, 20)
+        .text
+          line-height: 10px
+          font-size: 10px
+          color: rgb(77, 85, 93)
     .bulletin
       padding: 18px 18px 0 18px
       .title

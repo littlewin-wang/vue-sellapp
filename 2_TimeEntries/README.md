@@ -1,4 +1,4 @@
-# zhihu_daily
+# Time Entries
 
 > A Vue.js project
 

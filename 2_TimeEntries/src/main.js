@@ -25,7 +25,11 @@ const routes = [
   },
   {
     path: '/time-entries',
-    component: TimeEntries
+    component: TimeEntries,
+    children: [{
+      path: 'log-time',
+      component: resolve => require(['./components/logtime.vue'], resolve)
+    }]
   }
 ]
 

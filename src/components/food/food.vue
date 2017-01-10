@@ -231,6 +231,7 @@
           opacity: 1
         &.fade-enter, &.fade-leave
           opacity: 0
+          z-index: -1
     .info
       padding: 18px
       .title

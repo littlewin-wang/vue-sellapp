@@ -1,10 +1,24 @@
-# sellapp
+# [sellapp](http://littlewin-vue-sellapp.daoapp.io/)
 
-> A sell app demo by Vue.js.
+> 基于Vue和Node.js的仿移动端外卖web app
 
-## Build Setup
+> Web容器支持: [docker](https://www.docker.com/) + [Daocloud](https://www.daocloud.io/) 
 
-``` bash
+## 技术栈
+- vue 1.0 + vue-router + vue-resource + better-scroll
+- [stylus](https://github.com/stylus/stylus) + [normalize.css](https://github.com/necolas/normalize.css)
+
+## Preview
+![](https://cloud.githubusercontent.com/assets/14028075/21790600/6c6101ea-d718-11e6-8c75-6a7c1e86202d.gif)
+
+## Feature
+
+- 商品/评论/商家
+- 购物车/收藏
+- animation
+
+## 本地运行
+``` shell
 # install dependencies
 npm install
 
@@ -13,15 +27,18 @@ npm run dev
 
 # build for production with minification
 npm run build
-
-# run unit tests
-npm run unit
-
-# run e2e tests
-npm run e2e
-
-# run all tests
-npm test
 ```
 
-For detailed explanation on how things work, checkout the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+## Tips
+ 
+## TODO
+ - [x] 数据获取
+ - [x] 构建界面
+ - [x] 体验优化
+ - [ ] transition优化
+
+## study from
+ > [vue-sell](https://github.com/ustbhuangyi/vue-sell) By [ustbhuangyi](https://github.com/ustbhuangyi)
+
+## License
+ [MIT](http://opensource.org/licenses/MIT)

@@ -1,5 +1,5 @@
 <template>
-  <div class="ratings" v-el:ratings>
+  <div class="ratings" ref="ratings">
     <div class="ratings-content">
       <div class="overview">
         <div class="overview-left">
@@ -25,7 +25,8 @@
         </div>
       </div>
       <split></split>
-      <ratingselect :select-type="selectType" :only-content="onlyContent" :desc="desc" :ratings="ratings"></ratingselect>
+      <ratingselect @select="selectRating" @toggle="toggleContent" :selectType="selectType" :onlyContent="onlyContent"
+                    :ratings="ratings"></ratingselect>
       <div class="rating-wrapper">
         <ul>
           <li v-for="rating in ratings" v-show="needShow(rating.rateType, rating.text)" class="rating-item">
@@ -36,12 +37,12 @@
               <h1 class="name">{{rating.username}}</h1>
               <div class="star-wrapper">
                 <star :size="24" :score="rating.score"></star>
-                <span v-show="rating.deliveryTime" class="delivery">{{rating.deliveryTime}}</span>
+                <span class="delivery" v-show="rating.deliveryTime">{{rating.deliveryTime}}</span>
               </div>
               <p class="text">{{rating.text}}</p>
-              <div class="recommend" v-show="rating.recommend || rating.recommend.length">
+              <div class="recommend" v-show="rating.recommend && rating.recommend.length">
                 <span class="icon-thumb_up"></span>
-                <span v-for="item in rating.recommend" class="item">{{item}}</span>
+                <span class="item" v-for="item in rating.recommend">{{item}}</span>
               </div>
               <div class="time">
                 {{rating.rateTime | formatDate}}
@@ -55,12 +56,11 @@
 </template>
 
 <script type="text/ecmascript-6">
-  import {formatDate} from 'common/js/date'
   import BScroll from 'better-scroll'
-
+  import {formatDate} from 'common/js/date'
   import star from 'components/star/star'
-  import split from 'components/split/split'
   import ratingselect from 'components/ratingselect/ratingselect'
+  import split from 'components/split/split'
 
   const ALL = 2
   const ERR_OK = 0
@@ -71,55 +71,52 @@
         type: Object
       }
     },
-    data () {
+    data() {
       return {
         ratings: [],
         selectType: ALL,
         onlyContent: true
       }
     },
-    methods: {
-      needShow (type, text) {
-        if (this.onlyContent && !text) {
-          return false
-        }
-
-        if (this.selectType === ALL) {
-          return true
-        } else {
-          return type === this.selectType
-        }
-      }
-    },
-    created () {
+    created() {
       this.$http.get('/api/ratings').then((response) => {
         response = response.body
         if (response.errno === ERR_OK) {
           this.ratings = response.data
           this.$nextTick(() => {
-            this.scroll = new BScroll(this.$els.ratings, {
+            this.scroll = new BScroll(this.$refs.ratings, {
               click: true
             })
           })
         }
       })
     },
-    events: {
-      'ratingtype.select' (type) {
+    methods: {
+      needShow(type, text) {
+        if (this.onlyContent && !text) {
+          return false
+        }
+        if (this.selectType === ALL) {
+          return true
+        } else {
+          return type === this.selectType
+        }
+      },
+      selectRating(type) {
         this.selectType = type
         this.$nextTick(() => {
           this.scroll.refresh()
         })
       },
-      'content.toggle' (onlyContent) {
-        this.onlyContent = onlyContent
+      toggleContent() {
+        this.onlyContent = !this.onlyContent
         this.$nextTick(() => {
           this.scroll.refresh()
         })
       }
     },
     filters: {
-      formatDate (time) {
+      formatDate(time) {
         let date = new Date(time)
         return formatDate(date, 'yyyy-MM-dd hh:mm')
       }

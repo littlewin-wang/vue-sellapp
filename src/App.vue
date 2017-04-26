@@ -3,16 +3,18 @@
     <v-header :seller="seller"></v-header>
     <div class="tab border-1px">
       <div class="tab-item">
-        <a v-link="{path: '/goods'}">商品</a>
+        <router-link to="/goods">商品</router-link>
       </div>
       <div class="tab-item">
-        <a v-link="{path: '/ratings'}">评论</a>
+        <router-link to="/ratings">评论</router-link>
       </div>
       <div class="tab-item">
-        <a v-link="{path: '/seller'}">商家</a>
+        <router-link to="/seller">商家</router-link>
       </div>
     </div>
-    <router-view :seller="seller" keep-alive></router-view>
+    <keep-alive>
+      <router-view :seller="seller"></router-view>
+    </keep-alive>
   </div>
 </template>
 
@@ -58,7 +60,7 @@
     // border-bottom: 1px solid rgba(7, 17, 27, 0.1)
     border-1px(rgba(7, 17, 27, 0.1))
     .tab-item
-      flex: 100
+      flex: 1
       text-align: center
       & > a
         display: block
